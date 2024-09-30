@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grayLight"
+    android:orientation="vertical"
+    tools:context=".ui.fragments.OrderDetailsFragment">
+
+
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@android:color/white"
+        android:contentInsetStart="0dp"
+        android:contentInsetEnd="0dp"
+        android:fadingEdge="none"
+        android:fadingEdgeLength="0dp"
+        android:padding="0dp"
+        android:requiresFadingEdge="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="3dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/_8sdp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:padding="@dimen/_3sdp"
+                android:background="?actionBarItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:rotation="180"
+                android:src="@drawable/arrow_back"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="فاتورة رقم 20"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:id="@+id/btnHome"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:padding="@dimen/_3sdp"
+                android:background="?actionBarItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/home"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
+
+    </Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FAFAFA"
+                android:orientation="vertical"
+                android:padding="@dimen/_20sdp">
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="الاثنين 19 08 2024 "
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_24ssp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(4 : 00 PM)"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_24ssp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+            <!--Order Details Linear-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_radius_5"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:paddingVertical="@dimen/_8sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="تفاصيل الطلب"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_16ssp"
+                    android:textStyle="bold" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:background="@color/gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:text="اسم العميل"
+                    android:textColor="@color/gray" />
+
+
+                <TextView
+                    android:id="@+id/tvClientName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:text="محمد رشدي العبد"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:text="رقم الهاتف"
+                    android:textColor="@color/gray" />
+
+
+                <TextView
+                    android:id="@+id/tvClientPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:text="01231216545"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:text="العنوان"
+                    android:textColor="@color/gray" />
+
+
+                <TextView
+                    android:id="@+id/tvClientAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:text="المنصورة شارع "
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+
+            </LinearLayout>
+
+
+            <!--Order Elements-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="عناصر الطلب"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_order_details"
+                tools:itemCount="0"
+                />
+
+
+
+            <!--Operations -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blueLight"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="العمليات"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_16ssp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:textColor="@color/blueDark"/>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="طريقة الدفع"
+                            android:textColor="@color/gray"/>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_5sdp"
+                            android:layout_weight="1"/>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="نقدي"
+                            android:textColor="@color/gray"/>
+
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="اجمالي الخصم"
+                            android:textColor="@color/gray" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_5sdp"
+                            android:layout_weight="1"/>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="نقدي"
+                            android:textColor="@color/gray"/>
+
+
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_8sdp"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="المبلغ الاجمالي"
+                            android:textStyle="bold"
+                            android:textColor="@color/blueDark"/>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_5sdp"
+                            android:layout_weight="1"/>
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="200 جنيه"
+                            android:textStyle="bold"
+                            android:textColor="@color/blueDark"/>
+
+                    </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

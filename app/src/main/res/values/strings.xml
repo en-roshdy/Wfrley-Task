@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">WafarlyTask</string>
+    <string name="app_name" translatable="false">WafarlyTask</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="all_orders" translatable="false">كل الطلبات</string>
+    <string name="add_new_order">اضافة طلب جديد</string>
 </resources>

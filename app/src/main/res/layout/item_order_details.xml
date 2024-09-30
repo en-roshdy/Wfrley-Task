@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_70sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="@dimen/_8sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_65sdp"
+        android:background="@color/blueDark"
+        app:shapeAppearanceOverlay="@style/CustomImageViewStyle"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="توتس ريتش بيك"
+            android:textSize="@dimen/_16ssp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3 قطع * 25 جنيه"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_20ssp"
+            android:textStyle="bold"
+            android:textColor="@color/blueDark"
+            android:text="500"/>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/orders_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/orders_navigation"
+    app:startDestination="@id/viewOrdersFragment">
 
+    <fragment
+        android:id="@+id/viewOrdersFragment"
+        android:name="com.example.wafarlytask.ui.fragments.ViewOrdersFragment"
+        android:label="fragment_view_orders"
+        tools:layout="@layout/fragment_view_orders" >
+        <action
+            android:id="@+id/action_viewOrdersFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment" />
+        <argument android:name="order_id" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.example.wafarlytask.ui.fragments.OrderDetailsFragment"
+        android:label="fragment_order_details"
+        tools:layout="@layout/fragment_order_details" />
 </navigation>
