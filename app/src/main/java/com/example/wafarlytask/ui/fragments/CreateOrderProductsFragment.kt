@@ -1,60 +1,86 @@
 package com.example.wafarlytask.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.wafarlytask.CreateOrderViewModel
 import com.example.wafarlytask.R
+import com.example.wafarlytask.databinding.FragmentCreateOrderProductsBinding
+import com.example.wafarlytask.ui.ProductsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CreateOrderProductsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class CreateOrderProductsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private  val TAG = "CreateOrderProductsFrag"
+    private lateinit var productsAdapter: ProductsAdapter
+    private lateinit var binding: FragmentCreateOrderProductsBinding
+    private lateinit var gridLayoutManager: GridLayoutManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val createOrdersViewModel: CreateOrderViewModel by activityViewModels()
+
+    private var searchKey : String = ""
+
+    private fun setProductsRecyclerView() {
+        productsAdapter = ProductsAdapter()
+        gridLayoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvProducts.adapter = productsAdapter
+        binding.rvProducts.layoutManager = gridLayoutManager
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_order_products, container, false)
+    ): View {
+
+        binding = FragmentCreateOrderProductsBinding.inflate(inflater, container, false)
+        setProductsRecyclerView()
+        observeProducts()
+
+        getProducts()
+
+        binding.productSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // your text view here
+                Log.d(TAG, "onQueryTextChange: $newText -- End")
+            productsAdapter.filter.filter(newText ?: "")
+
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return true
+            }
+        })
+        binding.btnCompleteOrder.setOnClickListener {
+            findNavController().navigate(R.id.completeOrderFragment)
+        }
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CreateOrderProductsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CreateOrderProductsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun getProducts(){
+        createOrdersViewModel.getProducts(searchKey)
+    }
+
+    private fun observeProducts() {
+        createOrdersViewModel.productsLiveData.observe(viewLifecycleOwner) {
+            data ->
+            run {
+                if (data != null && data.isNotEmpty()) {
+                    productsAdapter.addProducts(data)
                 }
             }
+
+        }
     }
+
+
 }

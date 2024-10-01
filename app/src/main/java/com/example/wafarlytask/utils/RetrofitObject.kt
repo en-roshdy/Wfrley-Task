@@ -1,6 +1,7 @@
 package com.example.wafarlytask.utils
 
 import android.util.Log
+import com.example.wafarlytask.utils.Constants.BASE_URL
 import com.google.gson.GsonBuilder
 import com.ihsanbal.logging.LoggingInterceptor
 
@@ -20,7 +21,7 @@ object RetrofitObject {
 
     private const val TAG = "RetrofitInstance"
     private var retrofitObject: Retrofit? = null
-    private const val BASE_URL = "https://www.demo.alskab.com/api/v1/"
+
 
     var getNetworkInstance : Retrofit? = init()
 
@@ -35,6 +36,8 @@ object RetrofitObject {
                 .request("request")
                 .response("response")
                 .addHeader("Accept", "application/json")
+                .addHeader("charset", "utf-8")
+                .addHeader("Content-Type", "application/json")
 //                .addHeader("Authorization", "Bearer $token")
 //                .addHeader("Accept-Language", Lingver.getInstance().getLocale().language)
 //                .addHeader("version", BuildConfig.VERSION_NAME)

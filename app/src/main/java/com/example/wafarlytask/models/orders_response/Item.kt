@@ -21,7 +21,7 @@ data class Item(
     val paymentMethod: Int,
     val postponedDate: String,
     val preparingOrderEmployeeUser: Any,
-    val priceAfterDiscountTotal: Int,
+    val priceAfterDiscountTotal: Double,
     val purchasePoint: Int,
     val serviceFee: Double,
     val shippingAddresses: List<ShippingAddresse>,

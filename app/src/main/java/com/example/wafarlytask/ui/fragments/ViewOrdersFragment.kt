@@ -45,7 +45,7 @@ class ViewOrdersFragment : Fragment() , OrdersAdapter.OnItemClickListener{
         setRecyclerView()
 
         binding.addNewOrderClick.setOnClickListener {
-            startActivity(Intent(requireActivity(),CreateOrderActivity::class.java))
+            startActivity(Intent(requireContext(),CreateOrderActivity::class.java))
         }
         return binding.root
     }

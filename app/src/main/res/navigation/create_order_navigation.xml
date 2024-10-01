@@ -9,5 +9,14 @@
         android:id="@+id/createOrderProductsFragment"
         android:name="com.example.wafarlytask.ui.fragments.CreateOrderProductsFragment"
         android:label="fragment_create_order_products"
-        tools:layout="@layout/fragment_create_order_products" />
+        tools:layout="@layout/fragment_create_order_products" >
+        <action
+            android:id="@+id/action_createOrderProductsFragment_to_completeOrderFragment"
+            app:destination="@id/completeOrderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/completeOrderFragment"
+        android:name="com.example.wafarlytask.ui.fragments.CompleteOrderFragment"
+        android:label="fragment_complete_order"
+        tools:layout="@layout/fragment_complete_order" />
 </navigation>

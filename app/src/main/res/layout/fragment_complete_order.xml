@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_8sdp"
+    android:background="@color/white"
+    android:paddingHorizontal="@dimen/_8sdp"
+    tools:context=".ui.fragments.CompleteOrderFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="نقدي"
+                    android:textSize="@dimen/_15sdp"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/_15sdp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_gray_light_radius_8"/>
+
+                <View
+                    android:layout_width="@dimen/_5sdp"
+                    android:layout_height="@dimen/_5sdp"/>
+
+                <EditText
+                    android:id="@+id/etPayedAmount"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="الملبغ المدفوع"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:background="@drawable/bg_white_gray_border_5"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="vertical">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="بيانات الطلب"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/bg_white_gray_border_5"
+                    android:layout_marginVertical="@dimen/_5sdp"
+                    android:textAlignment="viewStart"
+                    android:padding="@dimen/_5sdp"
+                    android:hint="اسم العميل"
+                    android:maxLines="1"
+                    android:layout_marginHorizontal="@dimen/_10sdp"/>
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:background="@drawable/bg_white_gray_border_5"
+                    android:layout_marginVertical="@dimen/_5sdp"
+                    android:hint="رقم الهاتف"
+                    android:padding="@dimen/_5sdp"
+                    android:textAlignment="viewStart"
+                    android:inputType="phone"
+                    android:layout_marginHorizontal="@dimen/_10sdp"/>
+
+
+
+
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="عناصر الطلب"
+                android:textSize="@dimen/_15ssp"
+                android:textColor="@color/black"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textStyle="bold"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvOrderElements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_order_details"
+                android:layout_marginTop="@dimen/_5sdp"
+                />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        app:cornerRadius="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:textColor="#8E8E8E"
+        android:textStyle="bold"
+        android:textSize="@dimen/_15ssp"
+        android:background="@drawable/bg_gray_med_5"
+        android:gravity="center"
+        android:text="إتمام الطلب"
+        />
+
+</LinearLayout>
