@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.wafarlytask.CreateOrderViewModel
 import com.example.wafarlytask.R
 import com.example.wafarlytask.databinding.FragmentCreateOrderProductsBinding
+import com.example.wafarlytask.models.product_model.ProductModel
 import com.example.wafarlytask.ui.ProductsAdapter
+import com.example.wafarlytask.utils.OrderProductsListener
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class CreateOrderProductsFragment : Fragment() {
+class CreateOrderProductsFragment : Fragment(),OrderProductsListener {
     private  val TAG = "CreateOrderProductsFrag"
     private lateinit var productsAdapter: ProductsAdapter
     private lateinit var binding: FragmentCreateOrderProductsBinding
@@ -29,7 +31,7 @@ class CreateOrderProductsFragment : Fragment() {
     private var searchKey : String = ""
 
     private fun setProductsRecyclerView() {
-        productsAdapter = ProductsAdapter()
+        productsAdapter = ProductsAdapter(this)
         gridLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvProducts.adapter = productsAdapter
         binding.rvProducts.layoutManager = gridLayoutManager
@@ -43,7 +45,7 @@ class CreateOrderProductsFragment : Fragment() {
         binding = FragmentCreateOrderProductsBinding.inflate(inflater, container, false)
         setProductsRecyclerView()
         observeProducts()
-
+        observeOrderProducts()
         getProducts()
 
         binding.productSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -80,6 +82,42 @@ class CreateOrderProductsFragment : Fragment() {
             }
 
         }
+    }
+
+    private fun observeOrderProducts() {
+        createOrdersViewModel.orderProductsLiveData.observe(viewLifecycleOwner) {
+                data ->
+            run {
+                Log.d(TAG, "observeOrderProducts: ")
+                if (data != null && data.isNotEmpty()) {
+                    binding.btnCompleteOrder.visibility = View.VISIBLE
+                }else{
+                    binding.btnCompleteOrder.visibility = View.GONE
+
+                }
+            }
+
+        }
+    }
+
+    override fun increaseQuantity(productModel: ProductModel) {
+        createOrdersViewModel.increaseQuantity(productModel)
+
+    }
+
+    override fun decreaseQuantity(productModel: ProductModel) {
+        createOrdersViewModel.decreaseQuantity(productModel)
+
+    }
+
+    override fun addToOrder(productModel: ProductModel) {
+        createOrdersViewModel.addToOrder(productModel)
+
+    }
+
+    override fun removeFromOrder(productModel: ProductModel) {
+        createOrdersViewModel.removeFromOrder(productModel)
+
     }
 
 

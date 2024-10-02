@@ -15,8 +15,10 @@ import com.example.wafarlytask.databinding.ItemProductBinding
 
 import com.example.wafarlytask.models.product_model.ProductModel
 import com.example.wafarlytask.utils.Constants
+import com.example.wafarlytask.utils.OrderProductsListener
 
-class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsHolder>(), Filterable {
+class ProductsAdapter(private val orderProductsListener: OrderProductsListener) :
+    RecyclerView.Adapter<ProductsAdapter.ProductsHolder>(), Filterable {
 
     private val productsList: ArrayList<ProductModel> = ArrayList()
     private var filteredList: List<ProductModel> = listOf()
@@ -51,10 +53,35 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsHolder>(), 
         Glide.with(holder.itemView.context).load(Constants.DOMAIN_URL + productModel.image)
             .into(holder.binding.productImage)
 
+        holder.binding.tvProcutQuantity.text = productModel.orderQuantity.toString()
+
+        if (productModel.orderQuantity == 0) {
+            holder.binding.btnAddToOrder.visibility = View.VISIBLE
+            holder.binding.quantityLinear.visibility = View.GONE
+            holder.binding.mainLinear.setBackgroundResource(R.drawable.bg_white_gray_border_5)
+        } else {
+            holder.binding.btnAddToOrder.visibility = View.GONE
+            holder.binding.quantityLinear.visibility = View.VISIBLE
+            holder.binding.mainLinear.setBackgroundResource(R.drawable.bg_blue_med_radius_5)
+
+        }
+        holder.binding.btnAddToOrder.setOnClickListener {
+            productModel.orderQuantity = 1
+            notifyItemChanged(position)
+        }
+
+        holder.binding.btnIncreaseQuantity.setOnClickListener {
+            productModel.orderQuantity++
+            notifyItemChanged(position)
+        }
+
+        holder.binding.btnDecreaseQuantity.setOnClickListener {
+            productModel.orderQuantity--
+            notifyItemChanged(position)
+        }
 
         holder.binding.mainLinear.setOnClickListener {
             Log.d("ProductsAdapter", "onBindViewHolder: Clicked")
-            holder.binding.mainLinear.setBackgroundResource(R.drawable.bg_btn_primary)
 //notifyDataSetChanged()
         }
 
@@ -70,7 +97,8 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ProductsHolder>(), 
                     productsList // إذا كانت السلسلة فارغة، إرجاع القائمة الأصلية
                 } else {
                     productsList.filter { product ->
-                        product.name.lowercase().contains(query) // استخدام ignoreCase لمطابقة الحالة
+                        product.name.lowercase()
+                            .contains(query) // استخدام ignoreCase لمطابقة الحالة
                     }
                 }
 

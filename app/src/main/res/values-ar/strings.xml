@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">WafarlyTask</string>
     <string name="currency">جنيه</string>
+    <string name="currencyShortCut">ج.م</string>
 </resources>

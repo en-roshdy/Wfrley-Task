@@ -26,17 +26,19 @@
 
 
         <TextView
+            android:id="@+id/tvDateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="15 مايو 2020 29 PM"
-            android:gravity="center_vertical"
+    android:textAlignment="viewStart"
             android:textSize="@dimen/_14ssp"/>
 
         <TextView
+            android:id="@+id/tvProductsQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="15 مايو 2020 29 PM"
-            android:gravity="center_vertical"
+            android:textAlignment="viewStart"
             android:textSize="@dimen/_10ssp"
             android:textColor="@android:color/darker_gray"
             />
@@ -46,6 +48,7 @@
 
 
     <TextView
+        android:id="@+id/tvOrderPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="66600 ج.م"

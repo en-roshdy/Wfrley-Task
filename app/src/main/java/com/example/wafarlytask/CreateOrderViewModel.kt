@@ -26,14 +26,30 @@ class CreateOrderViewModel @Inject constructor(private val createOrderRepo: Crea
 
     private val orderProductsList : ArrayList<ProductModel> = ArrayList()
 
+    private val orderProductsMutable = MutableLiveData<List<ProductModel>>()
+     val  orderProductsLiveData : LiveData<List<ProductModel>> = orderProductsMutable
+
 
     fun addToOrder(productModel : ProductModel){
         orderProductsList.add(productModel)
+        orderProductsMutable.value = orderProductsList
     }
-
 
     fun removeFromOrder(productModel: ProductModel){
         orderProductsList.removeAt(orderProductsList.indexOf(productModel))
+        orderProductsMutable.value = orderProductsList
+    }
+
+    fun increaseQuantity(productModel: ProductModel){
+        productModel.orderQuantity ++
+        orderProductsMutable.value = orderProductsList
+    }
+
+    fun decreaseQuantity(productModel: ProductModel){
+        productModel.orderQuantity --
+        if(productModel.orderQuantity == 0)
+            orderProductsList.removeAt(orderProductsList.indexOf(productModel))
+        orderProductsMutable.value = orderProductsList
     }
 
 

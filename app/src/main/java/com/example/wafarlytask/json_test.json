@@ -1,0 +1,19 @@
+{
+  "customerId": "a8000b83-697b-47e6-abf6-f6bbea83d44a",
+  "customerServiceUserId": "c01282e4-7a03-424c-bbaa-c6df9c50af59",
+  "storeId": 5,
+  "paymentDeliveryMethod": 1,
+  "postponedDate": "2024-09-23T13:13:46.063Z",
+  "addressId": 227,
+  "priceAfterDiscountTotal": 50,
+  "orderDeliveryMethod": 1,
+  "orderDetails": [
+    {
+      "quantity": 1.25,
+      "rowTotal": 62.5,
+      "rowPriceAfterDiscount": 50,
+      "porductId": 240
+    }
+
+  ]
+}

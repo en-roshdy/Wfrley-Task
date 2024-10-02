@@ -5,29 +5,48 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wafarlytask.R
+import com.example.wafarlytask.databinding.ItemOrderViewBinding
+import com.example.wafarlytask.models.orders_response.Item
 
-class OrdersAdapter(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<OrdersAdapter.OrdersHolder>() {
+class OrdersAdapter(private val onItemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<OrdersAdapter.OrdersHolder>() {
+
+    private val ordersList: ArrayList<Item> = ArrayList()
+
+    fun addOrders(newOrdersList: List<Item>) {
+        ordersList.addAll(newOrdersList)
+        notifyItemRangeChanged(ordersList.size, itemCount)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersHolder {
+        val rootView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_order_view, parent, false)
+        return OrdersHolder(rootView)
+    }
+
+    override fun getItemCount(): Int {
+        return ordersList.size
+    }
+
+    override fun onBindViewHolder(holder: OrdersHolder, position: Int) {
+        val orderItem = ordersList[position]
+        val binding = holder.binding
+        binding.tvDateTime.text = orderItem.postponedDate
+        binding.tvOrderPrice.text =
+            "${orderItem.priceAfterDiscountTotal} ${holder.itemView.context.resources.getString(R.string.currencyShortCut)}"
+        binding.tvProductsQuantity.text = "  "
+
+        holder.itemView.setOnClickListener { onItemClickListener.onItemClick(orderItem.id) }
+    }
 
 
     class OrdersHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+        val binding: ItemOrderViewBinding = ItemOrderViewBinding.bind(itemView)
     }
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersHolder {
-        val rootView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_order_view, parent, false)
-        return  OrdersHolder(rootView)
-    }
 
-    override fun getItemCount(): Int {
-return  10
-     }
-
-    override fun onBindViewHolder(holder: OrdersHolder, position: Int) {
-holder.itemView.setOnClickListener { onItemClickListener.onItemClick(position) }
-    }
 }
