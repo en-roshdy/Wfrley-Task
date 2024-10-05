@@ -2,7 +2,6 @@ package com.example.wafarlytask.utils
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -21,14 +20,14 @@ object DateTimeHelper {
     }
 
 
-    fun getDateInAr(dateTimeString: String) :String{
+    private fun getDateInAr(dateTimeString: String) :String{
         val dateTime = LocalDateTime.parse(dateTimeString)
         val format = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale("ar")).format(dateTime)
         return format
     }
 
 
-    fun getDateTimeAr(dateTimeString : String): String{
+    private fun getDateTimeAr(dateTimeString : String): String{
         val dateTime = LocalDateTime.parse(dateTimeString)
 
 
