@@ -96,6 +96,8 @@
         android:layout_height="wrap_content"
         android:text="@string/all_orders"
         android:textStyle="bold"
+        android:layout_gravity="start"
+
         android:paddingHorizontal="@dimen/_16sdp"
         android:paddingVertical="@dimen/_8sdp"/>
 

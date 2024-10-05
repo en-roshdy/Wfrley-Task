@@ -7,4 +7,11 @@ data class ShippingAddresse(
     val postCode: Any,
     val street: String,
     val telephone: String
-)
+
+){
+
+
+    override fun  toString() : String{
+                 return  "$cityName, $street"
+    }
+}

@@ -2,6 +2,8 @@ package com.example.wafarlytask.data
 
 import com.example.wafarlytask.models.OrdersRequestDataModel
 import com.example.wafarlytask.models.ProductsRequestModel
+import com.example.wafarlytask.models.create_order_model.CreateOrderBodyModel
+import com.example.wafarlytask.models.create_order_model.CreateOrderResponse
 import com.example.wafarlytask.models.order_details_response_model.OrderDetailsResponse
 import com.example.wafarlytask.models.orders_response.OrdersResponseModel
 import com.example.wafarlytask.models.product_model.ProductModel
@@ -24,5 +26,9 @@ interface ApiService {
 
     @POST("OrderCustomerservice/SearchProductsForCustomer")
     suspend fun getProducts(@Body productRequestModel: ProductsRequestModel) : List<ProductModel>
+
+
+    @POST("OrderCustomerservice/CreateOrder")
+    suspend fun createOrder(@Body orderBodyModel: CreateOrderBodyModel) : CreateOrderResponse
 
 }

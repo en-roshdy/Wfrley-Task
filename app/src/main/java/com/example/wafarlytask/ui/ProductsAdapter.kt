@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,6 +16,7 @@ import com.example.wafarlytask.databinding.ItemProductBinding
 
 import com.example.wafarlytask.models.product_model.ProductModel
 import com.example.wafarlytask.utils.Constants
+import com.example.wafarlytask.utils.Helper
 import com.example.wafarlytask.utils.OrderProductsListener
 
 class ProductsAdapter(private val orderProductsListener: OrderProductsListener) :
@@ -49,12 +51,14 @@ class ProductsAdapter(private val orderProductsListener: OrderProductsListener) 
         val productModel = filteredList[position]
         holder.binding.tvProductName.text = productModel.name
         holder.binding.tvProductPrice.text =
-            "${productModel.priceAfterDiscount}  ${holder.itemView.context.getString(R.string.currency)}"
+            Helper.priceWithCurrency(holder.itemView.context,productModel.priceAfterDiscount)
         Glide.with(holder.itemView.context).load(Constants.DOMAIN_URL + productModel.image)
             .into(holder.binding.productImage)
 
         holder.binding.tvProcutQuantity.text = productModel.orderQuantity.toString()
 
+
+        /// In Cart
         if (productModel.orderQuantity == 0) {
             holder.binding.btnAddToOrder.visibility = View.VISIBLE
             holder.binding.quantityLinear.visibility = View.GONE
@@ -65,25 +69,36 @@ class ProductsAdapter(private val orderProductsListener: OrderProductsListener) 
             holder.binding.mainLinear.setBackgroundResource(R.drawable.bg_blue_med_radius_5)
 
         }
+
         holder.binding.btnAddToOrder.setOnClickListener {
-            productModel.orderQuantity = 1
+
+            if(productModel.salableQuantity <= productModel.orderQuantity){
+                Toast.makeText(holder.itemView.context, "الكمية لا تكفي", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+           orderProductsListener. addToOrder(productModel)
+
             notifyItemChanged(position)
         }
 
         holder.binding.btnIncreaseQuantity.setOnClickListener {
-            productModel.orderQuantity++
+            if(productModel.salableQuantity <= productModel.orderQuantity){
+            Toast.makeText(holder.itemView.context, "الكمية لا تكفي", Toast.LENGTH_SHORT).show()
+            return@setOnClickListener
+        }
+            orderProductsListener. increaseQuantity(productModel)
+
             notifyItemChanged(position)
         }
 
         holder.binding.btnDecreaseQuantity.setOnClickListener {
-            productModel.orderQuantity--
+
+            orderProductsListener. decreaseQuantity(productModel)
             notifyItemChanged(position)
         }
 
-        holder.binding.mainLinear.setOnClickListener {
-            Log.d("ProductsAdapter", "onBindViewHolder: Clicked")
-//notifyDataSetChanged()
-        }
+
+
 
     }
 

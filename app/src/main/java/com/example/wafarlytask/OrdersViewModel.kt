@@ -1,5 +1,6 @@
 package com.example.wafarlytask
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,6 +32,7 @@ class OrdersViewModel @Inject constructor(private val ordersRepo: OrdersRepo) : 
 
     private val orderDetailsMutable : MutableLiveData<OrderDetailsResponse> = MutableLiveData()
     val orderDetailsLive : LiveData<OrderDetailsResponse> = orderDetailsMutable
+
 
     fun getData() {
         viewModelScope.launch {
@@ -72,4 +74,12 @@ class OrdersViewModel @Inject constructor(private val ordersRepo: OrdersRepo) : 
             }
         }
     }
+
+    private  val TAG = "OrdersViewModel"
+    fun refreshOrders(){
+        Log.d(TAG, "refreshOrders: ")
+        currentPage = 1
+        getData()
+    }
+
 }

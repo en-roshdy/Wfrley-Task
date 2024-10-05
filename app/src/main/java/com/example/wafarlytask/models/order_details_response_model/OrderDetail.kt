@@ -6,7 +6,7 @@ data class OrderDetail(
     val productCustomizationId: Any,
     val productCustomizations: Any,
     val quantity: Double,
-    val rowPriceAfterDiscount: Int,
+    val rowPriceAfterDiscount: Double,
     val rowTotal: Double,
     val syncSucceed: Boolean
 )

@@ -1,5 +1,6 @@
 package com.example.wafarlytask.utils
 
+import ResponseInterceptor
 import android.util.Log
 import com.example.wafarlytask.utils.Constants.BASE_URL
 import com.google.gson.GsonBuilder
@@ -46,7 +47,7 @@ object RetrofitObject {
             val okHttpClient = OkHttpClient.Builder()
                 .connectTimeout(1000, TimeUnit.SECONDS)
                 .addInterceptor(loggingInterceptor)
-//                .addInterceptor(gfgInterceptor())
+                .addInterceptor(ResponseInterceptor())
                 .readTimeout(1000, TimeUnit.SECONDS)
                 .writeTimeout(1000, TimeUnit.SECONDS)
 //                .followRedirects(false)

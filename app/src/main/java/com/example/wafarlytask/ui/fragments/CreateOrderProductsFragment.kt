@@ -1,6 +1,8 @@
 package com.example.wafarlytask.ui.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +10,16 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.wafarlytask.CreateOrderViewModel
+import com.example.wafarlytask.OrdersViewModel
 import com.example.wafarlytask.R
 import com.example.wafarlytask.databinding.FragmentCreateOrderProductsBinding
 import com.example.wafarlytask.models.product_model.ProductModel
 import com.example.wafarlytask.ui.ProductsAdapter
+import com.example.wafarlytask.utils.Helper
 import com.example.wafarlytask.utils.OrderProductsListener
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,23 +50,25 @@ class CreateOrderProductsFragment : Fragment(),OrderProductsListener {
         binding = FragmentCreateOrderProductsBinding.inflate(inflater, container, false)
         setProductsRecyclerView()
         observeProducts()
-        observeOrderProducts()
+        observeOrderTotal()
         getProducts()
+        binding.productSearchView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-        binding.productSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // your text view here
-                Log.d(TAG, "onQueryTextChange: $newText -- End")
-            productsAdapter.filter.filter(newText ?: "")
-
-                return true
             }
 
-            override fun onQueryTextSubmit(query: String?): Boolean {
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-                return true
+             val searchKey = p0?.toString() ?: ""
+                productsAdapter.filter.filter(searchKey)
+
             }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
         })
+
         binding.btnCompleteOrder.setOnClickListener {
             findNavController().navigate(R.id.completeOrderFragment)
         }
@@ -78,25 +85,26 @@ class CreateOrderProductsFragment : Fragment(),OrderProductsListener {
             run {
                 if (data != null && data.isNotEmpty()) {
                     productsAdapter.addProducts(data)
+                    binding.mainProgressBar.visibility = View.GONE
                 }
             }
 
         }
     }
 
-    private fun observeOrderProducts() {
-        createOrdersViewModel.orderProductsLiveData.observe(viewLifecycleOwner) {
-                data ->
-            run {
-                Log.d(TAG, "observeOrderProducts: ")
-                if (data != null && data.isNotEmpty()) {
-                    binding.btnCompleteOrder.visibility = View.VISIBLE
-                }else{
-                    binding.btnCompleteOrder.visibility = View.GONE
 
-                }
+
+    private fun observeOrderTotal(){
+        createOrdersViewModel.orderTotalsLiveData.observe(viewLifecycleOwner){
+            if (it.totalQuantity ==0.0) {
+                binding.btnCompleteOrder.visibility = View.GONE
+
+            }else{
+                binding.btnCompleteOrder.visibility = View.VISIBLE
+                binding.tvOrderCount.text = "${Helper.roundToTwoDecimalPlaces(it.totalQuantity)}"
+                binding.tvOrderPrice.text = Helper.priceWithCurrency(requireContext(),it.totalPrice)
+
             }
-
         }
     }
 
@@ -112,7 +120,6 @@ class CreateOrderProductsFragment : Fragment(),OrderProductsListener {
 
     override fun addToOrder(productModel: ProductModel) {
         createOrdersViewModel.addToOrder(productModel)
-
     }
 
     override fun removeFromOrder(productModel: ProductModel) {

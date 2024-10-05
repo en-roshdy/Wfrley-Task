@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.wafarlytask.R
 import com.example.wafarlytask.databinding.ItemOrderViewBinding
 import com.example.wafarlytask.models.orders_response.Item
+import com.example.wafarlytask.utils.DateTimeHelper
+import com.example.wafarlytask.utils.Helper
 
 class OrdersAdapter(private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<OrdersAdapter.OrdersHolder>() {
@@ -31,9 +33,9 @@ class OrdersAdapter(private val onItemClickListener: OnItemClickListener) :
     override fun onBindViewHolder(holder: OrdersHolder, position: Int) {
         val orderItem = ordersList[position]
         val binding = holder.binding
-        binding.tvDateTime.text = orderItem.postponedDate
-        binding.tvOrderPrice.text =
-            "${orderItem.priceAfterDiscountTotal} ${holder.itemView.context.resources.getString(R.string.currencyShortCut)}"
+        binding.tvDateTime.text = DateTimeHelper.getDataTimeText(orderItem.createdDate)
+        binding.tvOrderPrice.text = Helper.priceWithCurrency(holder.itemView.context ,orderItem.priceAfterDiscountTotal)
+
         binding.tvProductsQuantity.text = "  "
 
         holder.itemView.setOnClickListener { onItemClickListener.onItemClick(orderItem.id) }

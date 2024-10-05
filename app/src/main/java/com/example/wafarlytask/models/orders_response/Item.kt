@@ -9,7 +9,7 @@ data class Item(
     val customerServiceUser: CustomerServiceUser,
     val customerUser: CustomerUser,
     val deliveryUser: Any,
-    val discountAmount: Int,
+    val discountAmount: Double,
     val fromPos: Boolean,
     val grandTotal: Double,
     val id: Int,

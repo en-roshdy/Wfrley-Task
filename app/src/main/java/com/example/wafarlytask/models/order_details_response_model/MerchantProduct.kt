@@ -10,9 +10,9 @@ data class MerchantProduct(
     val initialValue: Double,
     val isMostUsed: Boolean,
     val isOffer: Boolean,
-    val maxQuantity: Int,
-    val price: Int,
-    val priceAfterDiscount: Int,
+    val maxQuantity: Double,
+    val price: Double,
+    val priceAfterDiscount: Double,
     val productApparence: Int,
     val productApprovalStatus: Int,
     val status: Int

@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CreateOrderActivity : AppCompatActivity() {
 
-//    private val createOrdersViewModel: CreateOrderViewModel by viewModels()
+    private val viewOrdersViewModel: OrdersViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,5 +26,9 @@ class CreateOrderActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    fun refreshOrders(){
+        viewOrdersViewModel.refreshOrders()
     }
 }

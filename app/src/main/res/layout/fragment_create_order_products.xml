@@ -9,21 +9,42 @@
     tools:context=".ui.fragments.CreateOrderProductsFragment">
 
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/productSearchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginVertical="@dimen/_10sdp"
-        android:background="@drawable/bg_white_radius_5"
-        android:elevation="2dp"
-        android:queryHint="بحث بالاسم او الباركود" />
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_50sdp"
+      android:paddingHorizontal="@dimen/_8sdp"
+      android:gravity="center"
+      android:layout_marginHorizontal="@dimen/_20sdp"
+      android:layout_marginVertical="@dimen/_10sdp"
+      android:background="@drawable/bg_white_gray_border_5"
+      android:orientation="horizontal">
+      <EditText
+          android:id="@+id/productSearchView"
+          android:layout_width="0dp"
+          android:layout_weight="1"
+          android:layout_height="match_parent"
+          android:elevation="2dp"
+          android:layout_marginEnd="@dimen/_8sdp"
+          android:background="@android:color/transparent"
+          android:hint="بحث بالاسم او الباركود" />
 
+      <ImageView
+          android:layout_width="@dimen/_20sdp"
+          android:layout_height="@dimen/_20sdp"
+          android:src="@drawable/search"/>
+
+  </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <ProgressBar
+            android:id="@+id/mainProgressBar"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerInParent="true"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProducts"
